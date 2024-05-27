@@ -9,10 +9,9 @@ SRC	=	main.c \
 		check_args.c \
 		diner_routine.c \
 		handle_errors.c \
-		handle_mutex.c \
-		handle_thread.c \
+		handle_mutex_and_thread.c \
 		init_simulation.c \
-		init.c \
+		init_struct.c \
 		monitor.c \
 		mutex_access.c \
 		struct_allocation.c \
@@ -52,7 +51,7 @@ norm :
 	@if norminette | grep -v OK; then \
 		echo "$(RED)$(NB_ERRORS) norm issues$(RESET_COLOR)"; \
 	else \
-		echo "$(OK) No norm error left"; \
+		echo "$(OK) No norm errors left"; \
 	fi
 
 .PHONY: all clean fclean re norm

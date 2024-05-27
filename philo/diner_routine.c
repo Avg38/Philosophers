@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 12:12:16 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/16 17:22:27 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/21 10:09:06 by gemartel          #+#    #+#             */
+/*   Updated: 2024/05/27 16:21:03 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	print_message(t_rules *rules, char *str, int id)
 	handle_mutex(&rules->write_lock, UNLOCK);
 }
 
-void	think(t_rules *rules, t_philo *philo, bool pre_sim)
+void	think(t_philo *philo, t_rules *rules, bool pre_sim)
 {
 	long	t_eat;
 	long	t_sleep;
 	long	t_think;
 
 	if (pre_sim == false)
-		print_message(rules, "is_thinking", philo->id);
+		print_message(rules, "is thinking", philo->id);
 	if (rules->philo_nbr % 2 == 0)
 		return ;
 	t_eat = rules->time_to_eat;
@@ -41,10 +41,10 @@ void	think(t_rules *rules, t_philo *philo, bool pre_sim)
 	precise_sleep(rules, t_think * 0.10);
 }
 
-void	dream(t_rules *rules, t_philo *philos)
+void	dream(t_philo *philo, t_rules *rules)
 {
-	print_message(rules, "is_sleeping", philos->id);
-	precise_sleep(rules, rules->dead_flag);
+	print_message(rules, "is sleeping", philo->id);
+	precise_sleep(rules, rules->time_to_sleep);
 }
 
 void	eat(t_philo *philo)
@@ -54,11 +54,11 @@ void	eat(t_philo *philo)
 	print_message(philo->rules, "has taken a fork", philo->id);
 	print_message(philo->rules, "has taken a fork", philo->id);
 	philo->meals_eaten++;
-	set_mtx_long(&philo->philo_lock, &philo->last_meal, get_time());
-	print_message(philo->rules, "is_eating", philo->id);
+	set_mtxlong(&philo->philo_lock, &philo->last_meal, get_time());
+	print_message(philo->rules, "is eating", philo->id);
 	precise_sleep(philo->rules, philo->rules->time_to_eat);
 	if (philo->meals_eaten == philo->rules->max_meals)
-		set_mtx_bool(&philo->philo_lock, &philo->is_full, true);
+		set_mtxbool(&philo->philo_lock, &philo->is_full, true);
 	handle_mutex(philo->first_fork, UNLOCK);
 	handle_mutex(philo->second_fork, UNLOCK);
 }

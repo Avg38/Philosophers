@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 12:12:50 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/16 16:33:19 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/21 09:56:35 by gemartel          #+#    #+#             */
+/*   Updated: 2024/05/27 16:22:02 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	get_mtx_bool(t_mtx *mutex, bool *to_get)
+bool	get_mtxbool(t_mtx *mutex, bool *to_get)
 {
 	bool	ret;
 
@@ -22,14 +22,14 @@ bool	get_mtx_bool(t_mtx *mutex, bool *to_get)
 	return (ret);
 }
 
-void	set_mtx_bool(t_mtx *mutex, bool *to_set, bool value)
+void	set_mtxbool(t_mtx *mutex, bool *to_set, bool value)
 {
 	handle_mutex(mutex, LOCK);
 	*to_set = value;
 	handle_mutex(mutex, UNLOCK);
 }
 
-long	get_mtx_long(t_mtx *mutex, long *to_get)
+long	get_mtxlong(t_mtx *mutex, long *to_get)
 {
 	long	ret;
 
@@ -39,7 +39,7 @@ long	get_mtx_long(t_mtx *mutex, long *to_get)
 	return (ret);
 }
 
-void	set_mtx_long(t_mtx *mutex, long *to_set, long value)
+void	set_mtxlong(t_mtx *mutex, long *to_set, long value)
 {
 	handle_mutex(mutex, LOCK);
 	*to_set = value;

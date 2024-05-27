@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 12:12:41 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/16 17:22:39 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/21 10:48:07 by gemartel          #+#    #+#             */
+/*   Updated: 2024/05/27 16:21:56 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ bool	is_end_condition(t_rules *rules)
 	is_dead = false;
 	while (++i < rules->philo_nbr && is_dead == false)
 	{
-		set_mtx_bool(&(philos[i].philo_lock), &is_dead, get_elapsed_time_ms
-			(get_mtx_long(&(philos[i].philo_lock), &philos[i].last_meal))
+		set_mtxbool(&(philos[i].philo_lock), &is_dead, get_elapsed_time
+			(get_mtxlong(&(philos[i].philo_lock), &philos[i].last_meal))
 			>= rules->time_to_die);
-		if (get_mtx_bool(&(philos[i].philo_lock), &philos[i].is_full))
+		if (get_mtxbool(&(philos[i].philo_lock), &philos[i].is_full))
 			nb_full++;
 		if (is_dead == true || nb_full == rules->philo_nbr)
 		{
-			set_mtx_bool(&rules->mtx_rules, &rules->dead_flag, true);
+			set_mtxbool(&rules->mtx_rules, &rules->dead_flag, true);
 			if (is_dead)
 				last_print(rules, philos[i].id);
 		}
@@ -50,7 +50,8 @@ bool	is_end_condition(t_rules *rules)
 	return (is_dead || (nb_full == rules->philo_nbr));
 }
 
-bool	all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
+bool	all_threads_running(t_mtx *mutex, long *threads,
+		long philo_nbr)
 {
 	bool	ret;
 
@@ -67,10 +68,12 @@ void	*monitor(void *pointer)
 	t_rules	*rules;
 
 	rules = (t_rules *)pointer;
-	while (!all_threads_running(&rules->mtx_rules, \
-		&rules->threads_running_nbr, rules->philo_nbr))
+	while (!all_threads_running(&rules->mtx_rules,
+			&rules->threads_running_nbr, rules->philo_nbr))
 		;
 	while (!is_end_condition(rules))
+	{
 		usleep(3000);
+	}
 	return (NULL);
 }

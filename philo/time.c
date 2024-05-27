@@ -5,24 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 12:12:10 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/16 16:47:08 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/21 10:24:47 by gemartel          #+#    #+#             */
+/*   Updated: 2024/05/27 16:17:27 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	get_elapsed_time_ms(long timestamp_start)
+long	get_elapsed_time(long timestamp_start)
 {
 	return (get_time() - timestamp_start);
 }
 
 long	get_time(void)
 {
-	struct timeval	time;
+	struct timeval	tv;
 
-	gettimeofday(&time, NULL);
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
 void	precise_sleep(t_rules *rules, long ms)

@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 12:12:33 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/16 16:47:31 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/20 14:12:29 by gemartel          #+#    #+#             */
+/*   Updated: 2024/05/27 16:21:38 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	init_philos(t_rules *rules, t_mtx *forks, t_philo *philos)
+void	init_philos(t_philo *philos, t_rules *rules, t_mtx *forks)
 {
 	int	i;
 
@@ -44,16 +44,16 @@ void	init_forks(t_mtx *forks, int philo_nbr)
 		handle_mutex(&forks[i], INIT);
 }
 
-void	init_rules(t_rules *rules, t_philo *philos, char **av)
+void	init_rules(t_rules *rules, t_philo *philos, char **argv)
 {
 	rules->philos = philos;
-	rules->time_to_die = ft_atol(av[2]);
-	rules->time_to_eat = ft_atol(av[3]);
-	rules->time_to_sleep = ft_atol(av[4]);
-	rules->philo_nbr = (int)ft_atol(av[1]);
+	rules->time_to_die = ft_atol(argv[2]);
+	rules->time_to_eat = ft_atol(argv[3]);
+	rules->time_to_sleep = ft_atol(argv[4]);
+	rules->philo_nbr = (int)ft_atol(argv[1]);
 	rules->thread_ready = false;
-	if (av[5])
-		rules->max_meals = (int)ft_atol(av[5]);
+	if (argv[5])
+		rules->max_meals = (int)ft_atol(argv[5]);
 	else
 		rules->max_meals = -1;
 	handle_mutex(&rules->write_lock, INIT);

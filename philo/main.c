@@ -5,25 +5,26 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 11:56:26 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/16 16:47:27 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/20 13:54:51 by gemartel          #+#    #+#             */
+/*   Updated: 2024/05/27 16:21:50 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+int	main(int argc, char **argv)
 {
 	t_rules	*rules;
-	t_mtx	*forks;
 	t_philo	*philos;
+	t_mtx	*forks;
 
-	if (!check_args(ac, av))
+	if (!check_args(argc, argv))
 		return (EXIT_FAILURE);
-	if (!allocate_struct(&rules, &forks, &philos, ft_atol(av[1])))
+	if (!allocate_struct(&rules, &philos, &forks, ft_atol(argv[1])))
 		return (print_error(ERR_MALLOC), EXIT_FAILURE);
-	init_rules(rules, philos, av);
+	init_rules(rules, philos, argv);
 	init_forks(forks, rules->philo_nbr);
-	init_philos(rules, forks, philos);
+	init_philos(philos, rules, forks);
 	init_simulation(rules, forks, philos);
+	return (0);
 }

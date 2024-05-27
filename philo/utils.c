@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 11:56:23 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/16 16:35:10 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/20 13:58:22 by gemartel          #+#    #+#             */
+/*   Updated: 2024/05/16 12:00:06 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	is_digit(const char *str)
+uint8_t	is_digit(const char *s)
 {
-	while (*str)
+	while (*s)
 	{
-		if (*str < '0' || *str > '9')
+		if (*s < '0' || *s > '9')
 			return (0);
-		str++;
+		s++;
 	}
 	return (1);
+}
+
+uint8_t	ft_isspace(char c)
+{
+	if (c == ' ' || c == '\f' || c == '\t'
+		|| c == '\n' || c == '\r' || c == '\v')
+		return (1);
+	return (0);
 }
 
 int	ft_strlen(char *str)
@@ -33,15 +41,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_isspace(char c)
-{
-	if (c == ' ' || c == '\f' || c == '\t'
-		|| c == '\n' || c == '\r' || c == '\v')
-		return (1);
-	return (0);
-}
-
-long	ft_atol(const char *str)
+long	ft_atol(const char *s)
 {
 	long	result;
 	int		sign;
@@ -50,17 +50,17 @@ long	ft_atol(const char *str)
 	result = 0;
 	sign = 1;
 	i = 0;
-	while (ft_isspace(str[i]))
+	while (ft_isspace(s[i]))
 		i++;
-	if (str[i] == '-' || str[i] == '+')
+	if (s[i] == '-' || s[i] == '+')
 	{
-		if (str[i] == '-')
+		if (s[i] == '-')
 			sign = -1;
 		i++;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
+	while (s[i] >= '0' && s[i] <= '9')
 	{
-		result = result * 10 + (str[i] - '0');
+		result = result * 10 + (s[i] - '0');
 		i++;
 	}
 	return (result * sign);

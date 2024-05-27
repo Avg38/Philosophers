@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 12:12:38 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/16 17:23:00 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/22 14:58:21 by gemartel          #+#    #+#             */
+/*   Updated: 2024/05/27 16:33:12 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	free_data(t_rules **rules, t_mtx **forks, t_philo **philos)
+void	free_data(t_rules **rules, t_philo **philos, t_mtx **forks)
 {
 	if (*forks)
 		free(*forks);
@@ -36,17 +36,17 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return ((void *)memset(ptr, 0, nmemb * size));
 }
 
-bool	allocate_struct(t_rules **rules, \
-	t_mtx **forks, t_philo **philos, int philo_nbr)
+bool	allocate_struct(t_rules **rules, t_philo **philos
+	, t_mtx **forks, int philo_nbr)
 {
 	*rules = (t_rules *)ft_calloc(1, sizeof(t_rules));
 	if (!*rules)
 		return (false);
 	*philos = (t_philo *)ft_calloc(philo_nbr, sizeof(t_philo));
 	if (!*philos)
-		return (free_data(rules, forks, philos), false);
+		return (free_data(rules, philos, forks), false);
 	*forks = (t_mtx *)ft_calloc(philo_nbr, sizeof(t_mtx));
 	if (!*forks)
-		return (free_data(rules, forks, philos), false);
+		return (free_data(rules, philos, forks), false);
 	return (true);
 }
