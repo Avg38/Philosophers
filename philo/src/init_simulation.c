@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:42:28 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:23:12 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/20 15:42:28 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 15:43:45 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
-void	*lone_philo(void *arg)
+void	*lonely_philo(void *arg)
 {
 	t_philo	*philo;
 
@@ -37,26 +37,6 @@ static void	pre_desynchronize(t_philo *philo)
 		precise_sleep(philo->rules, 0.9 * philo->rules->time_to_sleep);
 }
 
-void	*diner_loop(void *pointer)
-{
-	t_philo	*philo;
-	t_rules	*rules;
-
-	philo = (t_philo *)pointer;
-	rules = philo->rules;
-	wait_all_threads(rules);
-	increase_long(&rules->mtx_rules, &rules->threads_running_nbr);
-	set_mtxlong(&philo->philo_lock, &philo->last_meal, rules->start_time);
-	pre_desynchronize(philo);
-	while (!dead_loop(rules))
-	{
-		eat(philo);
-		dream(philo, rules);
-		think(philo, rules, false);
-	}
-	return (pointer);
-}
-
 void	init_simulation(t_rules *rules, t_mtx *forks, t_philo *philos)
 {
 	pthread_t	observator;
@@ -66,7 +46,7 @@ void	init_simulation(t_rules *rules, t_mtx *forks, t_philo *philos)
 	if (rules->max_meals == 0)
 		return (exit_and_clean(rules, forks, philos));
 	else if (rules->philo_nbr == 1)
-		handle_thread(&rules->philos[i], LONE_PHILO);
+		handle_thread(&rules->philos[i], LONELY_PHILO);
 	else
 	{
 		while (i < rules->philo_nbr)

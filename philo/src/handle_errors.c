@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 14:02:19 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:23:04 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/20 14:02:19 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 15:34:11 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 void	exit_and_clean(t_rules *rules, t_mtx *forks, t_philo *philo)
 {
@@ -30,15 +30,15 @@ void	exit_and_clean(t_rules *rules, t_mtx *forks, t_philo *philo)
 	free_data(&rules, &philo, &forks);
 }
 
-void	ft_putstr_fd(char *s, uint8_t fd)
+void	ft_putstr_fd(char *str, uint8_t fd)
 {
-	if (s)
-		write(fd, s, ft_strlen(s));
+	if (str)
+		write(fd, str, ft_strlen(str));
 }
 
-void	print_error(char *s)
+void	print_error(char *msg)
 {
 	ft_putstr_fd(RED, 2);
-	ft_putstr_fd(s, 2);
+	ft_putstr_fd(msg, 2);
 	ft_putstr_fd(RESET, 2);
 }

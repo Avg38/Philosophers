@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/22 14:58:21 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:33:12 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/22 14:58:21 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 15:34:53 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 void	free_data(t_rules **rules, t_philo **philos, t_mtx **forks)
 {

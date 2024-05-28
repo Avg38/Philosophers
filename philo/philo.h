@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 13:44:01 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:32:58 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/20 13:44:01 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 10:36:35 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef enum e_code
 	UNLOCK,
 	DESTROY,
 	DETACH,
-	LONE_PHILO
+	LONELY_PHILO
 }	t_code;
 
 typedef struct s_rules	t_rules;
@@ -99,8 +99,8 @@ void	dream(t_philo *philo, t_rules *rules);
 void	eat(t_philo *philo);
 
 // -------------- handle_errors.c --------------
-void	print_error(char *s);
-void	ft_putstr_fd(char *s, uint8_t fd);
+void	print_error(char *msg);
+void	ft_putstr_fd(char *str, uint8_t fd);
 void	exit_and_clean(t_rules *rules, t_mtx *forks, t_philo *philo);
 
 // -------------- handle_mutex_and_thread.c --------------
@@ -109,7 +109,7 @@ void	handle_thread(t_philo *philo, t_code code);
 void	wait_all_threads(t_rules *rules);
 
 // -------------- init_simulation.c --------------
-void	*lone_philo(void *arg);
+void	*lonely_philo(void *arg);
 bool	dead_loop(t_rules *rules);
 void	*diner_loop(void *pointer);
 void	init_simulation(t_rules *rules, t_mtx *forks, t_philo *philos);

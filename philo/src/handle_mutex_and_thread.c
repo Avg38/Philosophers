@@ -5,34 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 15:23:53 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:28:07 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/20 15:23:53 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 15:34:14 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 void	handle_mutex(t_mtx *mutex, t_code mtxcode)
 {
-	if (LOCK == mtxcode)
+	if (mtxcode == LOCK)
 		pthread_mutex_lock(mutex);
-	else if (UNLOCK == mtxcode)
+	else if (mtxcode == UNLOCK)
 		pthread_mutex_unlock(mutex);
-	else if (INIT == mtxcode)
+	else if (mtxcode == INIT)
 		pthread_mutex_init(mutex, NULL);
-	else if (DESTROY == mtxcode)
+	else if (mtxcode == DESTROY)
 		pthread_mutex_destroy(mutex);
 }
 
 void	handle_thread(t_philo *philo, t_code code)
 {
-	if (CREATE == code)
+	if (code == CREATE)
 		pthread_create(&(philo->thread), NULL, &diner_loop, philo);
-	else if (LONE_PHILO == code)
-		pthread_create(&(philo->thread), NULL, &lone_philo, philo);
-	else if (JOIN == code)
+	else if (code == LONELY_PHILO)
+		pthread_create(&(philo->thread), NULL, &lonely_philo, philo);
+	else if (code == JOIN)
 		pthread_join(philo->thread, NULL);
-	else if (DETACH == code)
+	else if (code == DETACH)
 		pthread_detach(philo->thread);
 }
 

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 13:56:03 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:28:33 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/20 13:56:03 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 15:34:00 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 static bool	is_over_max_or_empty(char *content)
 {

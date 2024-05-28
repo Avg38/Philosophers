@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 09:56:35 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:22:02 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/21 09:56:35 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 15:34:46 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 bool	get_mtxbool(t_mtx *mutex, bool *to_get)
 {

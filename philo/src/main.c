@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 13:54:51 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:21:50 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/20 13:54:51 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 15:34:28 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 int	main(int argc, char **argv)
 {

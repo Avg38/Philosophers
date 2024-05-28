@@ -5,18 +5,18 @@ CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror -pthread
 RM			=	rm -rf
 
-SRC	=	main.c \
-		check_args.c \
-		diner_routine.c \
-		handle_errors.c \
-		handle_mutex_and_thread.c \
-		init_simulation.c \
-		init_struct.c \
-		monitor.c \
-		mutex_access.c \
-		struct_allocation.c \
-		time.c \
-		utils.c
+SRC	=	src/main.c \
+		src/check_args.c \
+		src/diner_routine.c \
+		src/handle_errors.c \
+		src/handle_mutex_and_thread.c \
+		src/init_simulation.c \
+		src/init_struct.c \
+		src/monitor.c \
+		src/mutex_access.c \
+		src/struct_allocation.c \
+		src/time.c \
+		src/utils.c
 
 OBJS	=	${SRC:.c=.o}
 

@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 10:09:06 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:21:03 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/21 10:09:06 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 15:43:51 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 void	print_message(t_rules *rules, char *str, int id)
 {
@@ -61,4 +61,24 @@ void	eat(t_philo *philo)
 		set_mtxbool(&philo->philo_lock, &philo->is_full, true);
 	handle_mutex(philo->first_fork, UNLOCK);
 	handle_mutex(philo->second_fork, UNLOCK);
+}
+
+void	*diner_loop(void *pointer)
+{
+	t_philo	*philo;
+	t_rules	*rules;
+
+	philo = (t_philo *)pointer;
+	rules = philo->rules;
+	wait_all_threads(rules);
+	increase_long(&rules->mtx_rules, &rules->threads_running_nbr);
+	set_mtxlong(&philo->philo_lock, &philo->last_meal, rules->start_time);
+	pre_desynchronize(philo);
+	while (!dead_loop(rules))
+	{
+		eat(philo);
+		dream(philo, rules);
+		think(philo, rules, false);
+	}
+	return (pointer);
 }

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/20 14:12:29 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:21:38 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/20 14:12:29 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 15:34:25 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 void	init_philos(t_philo *philos, t_rules *rules, t_mtx *forks)
 {
@@ -47,10 +47,10 @@ void	init_forks(t_mtx *forks, int philo_nbr)
 void	init_rules(t_rules *rules, t_philo *philos, char **argv)
 {
 	rules->philos = philos;
+	rules->philo_nbr = (int)ft_atol(argv[1]);
 	rules->time_to_die = ft_atol(argv[2]);
 	rules->time_to_eat = ft_atol(argv[3]);
 	rules->time_to_sleep = ft_atol(argv[4]);
-	rules->philo_nbr = (int)ft_atol(argv[1]);
 	rules->thread_ready = false;
 	if (argv[5])
 		rules->max_meals = (int)ft_atol(argv[5]);

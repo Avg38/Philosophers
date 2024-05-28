@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 10:48:07 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:21:56 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/21 10:48:07 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 15:34:36 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 void	last_print(t_rules *rules, int id)
 {
@@ -50,8 +50,8 @@ bool	is_end_condition(t_rules *rules)
 	return (is_dead || (nb_full == rules->philo_nbr));
 }
 
-bool	all_threads_running(t_mtx *mutex, long *threads,
-		long philo_nbr)
+bool	all_threads_running(t_mtx *mutex, long *threads, \
+long philo_nbr)
 {
 	bool	ret;
 
@@ -72,8 +72,6 @@ void	*monitor(void *pointer)
 			&rules->threads_running_nbr, rules->philo_nbr))
 		;
 	while (!is_end_condition(rules))
-	{
 		usleep(3000);
-	}
 	return (NULL);
 }

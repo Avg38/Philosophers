@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/21 10:24:47 by gemartel          #+#    #+#             */
-/*   Updated: 2024/05/27 16:17:27 by avialle-         ###   ########.fr       */
+/*   Created: 2024/03/21 10:24:47 by avialle-          #+#    #+#             */
+/*   Updated: 2024/05/28 15:34:56 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 long	get_elapsed_time(long timestamp_start)
 {
