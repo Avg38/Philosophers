@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:42:28 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/28 15:43:45 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/29 13:50:55 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	dead_loop(t_rules *rules)
 	return (get_mtxbool(&rules->mtx_rules, &rules->dead_flag));
 }
 
-static void	pre_desynchronize(t_philo *philo)
+void	pre_desynchronize(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 		precise_sleep(philo->rules, 0.9 * philo->rules->time_to_sleep);

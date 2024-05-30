@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:44:01 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/28 10:36:35 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:46:52 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef enum e_code
 	LOCK,
 	UNLOCK,
 	DESTROY,
-	DETACH,
 	LONELY_PHILO
 }	t_code;
 
@@ -113,6 +112,7 @@ void	*lonely_philo(void *arg);
 bool	dead_loop(t_rules *rules);
 void	*diner_loop(void *pointer);
 void	init_simulation(t_rules *rules, t_mtx *forks, t_philo *philos);
+void	pre_desynchronize(t_philo *philo);
 
 // ------------------- init.c -------------------
 void	init_rules(t_rules *rules, t_philo *philos, char **argv);

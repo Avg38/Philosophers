@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:23:53 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/28 15:34:14 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/05/30 10:46:46 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	handle_thread(t_philo *philo, t_code code)
 		pthread_create(&(philo->thread), NULL, &lonely_philo, philo);
 	else if (code == JOIN)
 		pthread_join(philo->thread, NULL);
-	else if (code == DETACH)
-		pthread_detach(philo->thread);
 }
 
 void	wait_all_threads(t_rules *rules)
