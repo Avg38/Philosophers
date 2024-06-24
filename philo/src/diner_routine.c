@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:09:06 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/29 13:52:49 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:13:55 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,33 @@ void	dream(t_philo *philo, t_rules *rules)
 	precise_sleep(rules, rules->time_to_sleep);
 }
 
-void	eat(t_philo *philo)
+// void	eat(t_rules *rules, t_philo *philo)
+// {
+// 	handle_mutex(&rules->mtx_forks[philo->first_fork_id], LOCK);
+// 	handle_mutex(&rules->mtx_forks[philo->second_fork_id], LOCK);
+// 	philo->first_fork = true;
+// 	philo->second_fork = true;
+// 	print_message(philo->rules, "has taken a fork", philo->id);
+// 	print_message(philo->rules, "has taken a fork", philo->id);
+// 	philo->meals_eaten++;
+// 	set_mtxlong(&philo->philo_lock, &philo->last_meal, get_time());
+// 	print_message(philo->rules, "is eating", philo->id);
+// 	precise_sleep(philo->rules, philo->rules->time_to_eat);
+// 	if (philo->meals_eaten == philo->rules->max_meals)
+// 		set_mtxbool(&philo->philo_lock, &philo->is_full, true);
+// 	philo->first_fork = false;
+// 	philo->second_fork = false;
+// 	handle_mutex(&rules->mtx_forks[philo->first_fork_id], UNLOCK);
+// 	handle_mutex(&rules->mtx_forks[philo->second_fork_id], UNLOCK);
+// }
+
+
+void	eat(t_rules *rules, t_philo *philo)
 {
-	handle_mutex(philo->first_fork, LOCK);
-	handle_mutex(philo->second_fork, LOCK);
+	handle_mutex(&rules->mtx_forks[philo->first_fork_id], LOCK);
+	handle_mutex(&rules->mtx_forks[philo->second_fork_id], LOCK);
+	philo->first_fork = true;
+	philo->second_fork = true;
 	print_message(philo->rules, "has taken a fork", philo->id);
 	print_message(philo->rules, "has taken a fork", philo->id);
 	philo->meals_eaten++;
@@ -59,8 +82,21 @@ void	eat(t_philo *philo)
 	precise_sleep(philo->rules, philo->rules->time_to_eat);
 	if (philo->meals_eaten == philo->rules->max_meals)
 		set_mtxbool(&philo->philo_lock, &philo->is_full, true);
-	handle_mutex(philo->first_fork, UNLOCK);
-	handle_mutex(philo->second_fork, UNLOCK);
+	philo->first_fork = false;
+	philo->second_fork = false;
+	handle_mutex(&rules->mtx_forks[philo->second_fork_id], UNLOCK);
+	handle_mutex(&rules->mtx_forks[philo->first_fork_id], UNLOCK);
+}
+
+static void	keep_desynchronize(t_philo *philos)
+{
+	long	t_die;
+	long	t_loop;
+
+	t_die = philos->rules->time_to_die;
+	t_loop = philos->rules->time_to_eat + philos->rules->time_to_sleep;
+	if (t_die > t_loop + 50)
+		ms_sleep((t_die - t_loop) - 50);
 }
 
 void	*diner_loop(void *pointer)
@@ -76,9 +112,11 @@ void	*diner_loop(void *pointer)
 	pre_desynchronize(philo);
 	while (!dead_loop(rules))
 	{
-		eat(philo);
+		eat(rules, philo);
 		dream(philo, rules);
 		think(philo, rules, false);
+		if (rules->philo_nbr % 2 != 0)
+			keep_desynchronize(philo);
 	}
 	return (pointer);
 }

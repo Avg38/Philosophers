@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:44:01 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/30 10:46:52 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/24 12:05:29 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ typedef struct s_philo
 	bool			is_full;
 	long			last_meal;
 	t_mtx			philo_lock;
-	t_mtx			*first_fork;
-	t_mtx			*second_fork;
+	bool			first_fork;
+	bool			second_fork;
+	int				first_fork_id;
+	int				second_fork_id;
 	t_rules			*rules;
 }					t_philo;
 
@@ -83,6 +85,8 @@ typedef struct s_rules
 	long			threads_running_nbr;
 	bool			thread_ready;
 	bool			dead_flag;
+	bool			*forks;
+	t_mtx			*mtx_forks;
 	t_mtx			mtx_rules;
 	t_mtx			write_lock;
 	t_philo			*philos;
@@ -95,12 +99,12 @@ bool	check_args(int argc, char **argv);
 void	print_message(t_rules *rules, char *str, int id);
 void	think(t_philo *philo, t_rules *rules, bool pre_sim);
 void	dream(t_philo *philo, t_rules *rules);
-void	eat(t_philo *philo);
+void	eat(t_rules *rules, t_philo *philo);
 
 // -------------- handle_errors.c --------------
 void	print_error(char *msg);
 void	ft_putstr_fd(char *str, uint8_t fd);
-void	exit_and_clean(t_rules *rules, t_mtx *forks, t_philo *philo);
+void	exit_and_clean(t_rules *rules, t_philo *philo);
 
 // -------------- handle_mutex_and_thread.c --------------
 void	handle_mutex(t_mtx *mutex, t_code mtxcode);
@@ -111,19 +115,19 @@ void	wait_all_threads(t_rules *rules);
 void	*lonely_philo(void *arg);
 bool	dead_loop(t_rules *rules);
 void	*diner_loop(void *pointer);
-void	init_simulation(t_rules *rules, t_mtx *forks, t_philo *philos);
+void	init_simulation(t_rules *rules, t_philo *philos);
 void	pre_desynchronize(t_philo *philo);
 
 // ------------------- init.c -------------------
 void	init_rules(t_rules *rules, t_philo *philos, char **argv);
-void	init_forks(t_mtx *forks, int philo_nbr);
-void	init_philos(t_philo *philos, t_rules *rules, t_mtx *forks);
+void	init_forks(t_rules *rules, int philo_nbr);
+void	init_philos(t_philo *philos, t_rules *rules);
 
 // -------------- monitor.c --------------
 void	last_print(t_rules *rules, int id);
 bool	is_end_condition(t_rules *rules);
 bool	all_threads_running(t_mtx *mutex, long *threads, \
-long philo_nbr);
+long	philo_nbr);
 void	*monitor(void *pointer);
 
 // -------------- mutex_access.c --------------
@@ -134,15 +138,15 @@ void	set_mtxlong(t_mtx *mutex, long *to_set, long value);
 void	increase_long(t_mtx *mutex, long *value);
 
 // -------------- struct_allocation.c --------------
-void	free_data(t_rules **rules, t_philo **philos, t_mtx **forks);
+void	free_data(t_rules **rules, t_philo **philos);
 void	*ft_calloc(size_t nmemb, size_t size);
-bool	allocate_struct(t_rules **rules, t_philo **philos, \
-t_mtx **forks, int philo_nbr);
+bool	allocate_struct(t_rules **rules, t_philo **philos, int philo_nbr);
 
 // -------------- time.c --------------
 long	get_time(void);
 void	precise_sleep(t_rules *rules, long usec);
 long	get_elapsed_time(long timestamp_start);
+void	ms_sleep(long ms);
 
 // -------------- utils.c --------------
 uint8_t	is_digit(const char *s);
