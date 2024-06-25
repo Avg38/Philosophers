@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:09:06 by avialle-          #+#    #+#             */
-/*   Updated: 2024/06/25 16:21:42 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:50:58 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,11 @@ void	dream(t_philo *philo, t_rules *rules)
 
 void	eat(t_rules *rules, t_philo *philo)
 {
+	while (get_mtxbool(&rules->mtx_forks[philo->first_fork_id], philo->first_fork)
+		|| get_mtxbool(&rules->mtx_forks[philo->second_fork_id], philo->second_fork))
+		usleep(100);
 	set_mtxbool(&rules->mtx_forks[philo->first_fork_id], philo->first_fork, true);
 	set_mtxbool(&rules->mtx_forks[philo->second_fork_id], philo->second_fork, true);
-	// handle_mutex(&rules->mtx_forks[philo->first_fork_id], LOCK);
-	// handle_mutex(&rules->mtx_forks[philo->second_fork_id], LOCK);
-	// philo->first_fork = true;
-	// philo->second_fork = true;
 	print_message(philo->rules, "has taken a fork", philo->id);
 	print_message(philo->rules, "has taken a fork", philo->id);
 	philo->meals_eaten++;
