@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:09:06 by avialle-          #+#    #+#             */
-/*   Updated: 2024/06/25 16:50:58 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:03:43 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,6 @@ void	eat(t_rules *rules, t_philo *philo)
 		set_mtxbool(&philo->philo_lock, &philo->is_full, true);
 	set_mtxbool(&rules->mtx_forks[philo->second_fork_id], philo->second_fork, false);
 	set_mtxbool(&rules->mtx_forks[philo->first_fork_id], philo->first_fork, false);
-	// philo->first_fork = false;
-	// philo->second_fork = false;
-	// handle_mutex(&rules->mtx_forks[philo->second_fork_id], UNLOCK);
-	// handle_mutex(&rules->mtx_forks[philo->first_fork_id], UNLOCK);
 }
 
 void	*diner_loop(void *pointer)
