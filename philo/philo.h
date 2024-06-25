@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:44:01 by avialle-          #+#    #+#             */
-/*   Updated: 2024/06/24 12:05:29 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:20:46 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ typedef struct s_philo
 	bool			is_full;
 	long			last_meal;
 	t_mtx			philo_lock;
-	bool			first_fork;
-	bool			second_fork;
+	bool			*first_fork;
+	bool			*second_fork;
 	int				first_fork_id;
 	int				second_fork_id;
 	t_rules			*rules;
@@ -97,7 +97,7 @@ bool	check_args(int argc, char **argv);
 
 // -------------- diner_routine.c --------------
 void	print_message(t_rules *rules, char *str, int id);
-void	think(t_philo *philo, t_rules *rules, bool pre_sim);
+void	think(t_philo *philo, t_rules *rules);
 void	dream(t_philo *philo, t_rules *rules);
 void	eat(t_rules *rules, t_philo *philo);
 
@@ -117,6 +117,7 @@ bool	dead_loop(t_rules *rules);
 void	*diner_loop(void *pointer);
 void	init_simulation(t_rules *rules, t_philo *philos);
 void	pre_desynchronize(t_philo *philo);
+void	keep_desynchronize(t_philo *philos);
 
 // ------------------- init.c -------------------
 void	init_rules(t_rules *rules, t_philo *philos, char **argv);
@@ -127,7 +128,7 @@ void	init_philos(t_philo *philos, t_rules *rules);
 void	last_print(t_rules *rules, int id);
 bool	is_end_condition(t_rules *rules);
 bool	all_threads_running(t_mtx *mutex, long *threads, \
-long	philo_nbr);
+long philo_nbr);
 void	*monitor(void *pointer);
 
 // -------------- mutex_access.c --------------

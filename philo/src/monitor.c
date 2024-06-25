@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:48:07 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/28 15:34:36 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/25 11:08:59 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void	*monitor(void *pointer)
 			&rules->threads_running_nbr, rules->philo_nbr))
 		;
 	while (!is_end_condition(rules))
-		usleep(3000);
+		usleep(1000);
 	return (NULL);
 }

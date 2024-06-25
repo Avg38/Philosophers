@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:42:28 by avialle-          #+#    #+#             */
-/*   Updated: 2024/06/24 10:58:04 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/25 14:43:27 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,17 @@ void	pre_desynchronize(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 		precise_sleep(philo->rules, 0.9 * philo->rules->time_to_sleep);
+}
+
+void	keep_desynchronize(t_philo *philos)
+{
+	long	t_die;
+	long	t_loop;
+
+	t_die = philos->rules->time_to_die;
+	t_loop = philos->rules->time_to_eat + philos->rules->time_to_sleep;
+	if (t_die > t_loop + 50)
+		ms_sleep((t_die - t_loop) - 50);
 }
 
 void	init_simulation(t_rules *rules, t_philo *philos)

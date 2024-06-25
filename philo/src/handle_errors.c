@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 14:02:19 by avialle-          #+#    #+#             */
-/*   Updated: 2024/06/24 11:14:53 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/25 11:00:47 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	exit_and_clean(t_rules *rules, t_philo *philo)
 	{
 		handle_thread(&philo[i], JOIN);
 		handle_mutex(&philo[i].philo_lock, DESTROY);
-		handle_mutex(&rules->mtx_forks[i], DESTROY);
 	}
 	handle_mutex(&rules->write_lock, DESTROY);
 	handle_mutex(&rules->mtx_rules, DESTROY);

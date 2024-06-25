@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 14:12:29 by avialle-          #+#    #+#             */
-/*   Updated: 2024/06/24 11:47:03 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/25 16:22:25 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	init_philos(t_philo *philos, t_rules *rules)
 		philos[i].rules = rules;
 		if (philos[i].id % 2 == 0)
 		{
-			philos[i].second_fork = rules->forks[i];
+			philos[i].second_fork = &rules->forks[i];
 			philos[i].second_fork_id = i;
-			philos[i].first_fork = rules->forks[(i + 1) % rules->philo_nbr];
+			philos[i].first_fork = &rules->forks[(i + 1) % rules->philo_nbr];
 			philos[i].first_fork_id = (i + 1) % rules->philo_nbr;
 		}
 		else
 		{
-			philos[i].first_fork = rules->forks[i];
+			philos[i].first_fork = &rules->forks[i];
 			philos[i].first_fork_id = i;
-			philos[i].second_fork = rules->forks[(i + 1) % rules->philo_nbr];
+			philos[i].second_fork = &rules->forks[(i + 1) % rules->philo_nbr];
 			philos[i].second_fork_id = (i + 1) % rules->philo_nbr;
 		}
 		i++;
