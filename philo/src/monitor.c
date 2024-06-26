@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:48:07 by avialle-          #+#    #+#             */
-/*   Updated: 2024/06/25 11:08:59 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/26 11:08:34 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	*monitor(void *pointer)
 	rules = (t_rules *)pointer;
 	while (!all_threads_running(&rules->mtx_rules,
 			&rules->threads_running_nbr, rules->philo_nbr))
-		;
+		usleep(1000);
 	while (!is_end_condition(rules))
 		usleep(1000);
 	return (NULL);

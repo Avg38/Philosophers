@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:09:06 by avialle-          #+#    #+#             */
-/*   Updated: 2024/06/25 17:03:43 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/26 11:23:09 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,15 @@ void	dream(t_philo *philo, t_rules *rules)
 
 void	eat(t_rules *rules, t_philo *philo)
 {
-	while (get_mtxbool(&rules->mtx_forks[philo->first_fork_id], philo->first_fork)
-		|| get_mtxbool(&rules->mtx_forks[philo->second_fork_id], philo->second_fork))
+	while (get_mtxbool(&rules->mtx_forks[philo->first_fork_id],
+			philo->first_fork)
+		|| get_mtxbool(&rules->mtx_forks[philo->second_fork_id],
+			philo->second_fork))
 		usleep(100);
-	set_mtxbool(&rules->mtx_forks[philo->first_fork_id], philo->first_fork, true);
-	set_mtxbool(&rules->mtx_forks[philo->second_fork_id], philo->second_fork, true);
+	set_mtxbool(&rules->mtx_forks[philo->first_fork_id],
+		philo->first_fork, true);
+	set_mtxbool(&rules->mtx_forks[philo->second_fork_id],
+		philo->second_fork, true);
 	print_message(philo->rules, "has taken a fork", philo->id);
 	print_message(philo->rules, "has taken a fork", philo->id);
 	philo->meals_eaten++;
@@ -57,8 +61,10 @@ void	eat(t_rules *rules, t_philo *philo)
 	precise_sleep(philo->rules, philo->rules->time_to_eat);
 	if (philo->meals_eaten == philo->rules->max_meals)
 		set_mtxbool(&philo->philo_lock, &philo->is_full, true);
-	set_mtxbool(&rules->mtx_forks[philo->second_fork_id], philo->second_fork, false);
-	set_mtxbool(&rules->mtx_forks[philo->first_fork_id], philo->first_fork, false);
+	set_mtxbool(&rules->mtx_forks[philo->second_fork_id],
+		philo->second_fork, false);
+	set_mtxbool(&rules->mtx_forks[philo->first_fork_id],
+		philo->first_fork, false);
 }
 
 void	*diner_loop(void *pointer)

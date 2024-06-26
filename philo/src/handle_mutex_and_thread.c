@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 15:23:53 by avialle-          #+#    #+#             */
-/*   Updated: 2024/05/30 10:46:46 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/06/26 10:59:05 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	handle_thread(t_philo *philo, t_code code)
 void	wait_all_threads(t_rules *rules)
 {
 	while (!get_mtxbool(&rules->mtx_rules, &rules->thread_ready))
-		;
+		usleep(100);
 }
