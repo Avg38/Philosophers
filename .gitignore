@@ -48,6 +48,7 @@
 .tmp_versions/
 philogeoff/
 philoMain/
+philo
 LazyPhilosophersTester/
 modules.order
 Module.symvers
