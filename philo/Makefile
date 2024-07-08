@@ -1,7 +1,6 @@
 .DEFAULT_GOAL : all
 
 NAME		=	philo
-CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -rf
 
@@ -43,7 +42,8 @@ clean :
 fclean : clean
 	@$(RM) $(NAME)
 
-re : fclean all
+re :	fclean
+		$(MAKE) all
 
 NB_ERRORS = $(shell norminette | grep Error: | wc -l)
 
@@ -53,20 +53,5 @@ norm :
 	else \
 		echo "$(OK) No norm errors left"; \
 	fi
-
-test1 :
-	./philo 1 800 200 200
-
-test2 :
-	./philo 5 800 200 200
-
-test3 :
-	./philo 5 800 200 200 7
-
-test4 :
-	./philo 4 410 200 200
-
-test5 :
-	./philo 4 310 200 100
 
 .PHONY: all clean fclean re norm

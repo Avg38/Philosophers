@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/21 10:24:47 by avialle-          #+#    #+#             */
-/*   Updated: 2024/06/25 11:10:16 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/07/08 11:01:21 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,5 @@ void	precise_sleep(t_rules *rules, long ms)
 
 void	ms_sleep(long ms)
 {
-	fflush(stdout);
 	usleep(ms * 1000);
 }
