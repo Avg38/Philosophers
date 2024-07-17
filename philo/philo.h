@@ -6,7 +6,7 @@
 /*   By: avialle- <avialle-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/20 13:44:01 by avialle-          #+#    #+#             */
-/*   Updated: 2024/06/25 16:41:35 by avialle-         ###   ########.fr       */
+/*   Updated: 2024/07/11 13:03:59 by avialle-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef enum e_code
 typedef struct s_rules	t_rules;
 typedef pthread_mutex_t	t_mtx;
 
-/**Structure**/
+/**Structures**/
 typedef struct s_philo
 {
 	pthread_t		thread;

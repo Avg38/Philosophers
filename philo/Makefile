@@ -1,7 +1,7 @@
 .DEFAULT_GOAL : all
 
 NAME		=	philo
-CFLAGS		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror -pthread
 RM			=	rm -rf
 
 SRC	=	src/main.c \
